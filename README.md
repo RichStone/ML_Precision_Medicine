@@ -1,6 +1,6 @@
 ## Version control installation of existing Notebook via jupytext
 
-```python
+```bash
 # do this once
 pip install jupytext
 jupyter notebook --generate-config -y
@@ -19,7 +19,7 @@ jupytext --to notebook --update VERSION-CONTROL-OUTPUT-DIRECTORY-NAME/NOTEBOOK_N
 further reference: https://github.com/mwouts/jupytext#jupytext-commands-in-jupyterlab
 
 ## Installation of python projects and Jupyter
-```python
+```bash
 cd project_folder
 
 # create your virtual environment
