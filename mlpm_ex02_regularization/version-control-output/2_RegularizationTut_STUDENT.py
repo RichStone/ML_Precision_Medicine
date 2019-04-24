@@ -117,8 +117,9 @@ fig.tight_layout()
 # What is shown on the x-axis? what is the y-axis?
 
 # + {"colab_type": "raw", "id": "R0w6_UR7Bq_z", "cell_type": "markdown"}
-# x-axis:
-# y-axis:
+# x-axis: feature values
+#
+# y-axis: number of occurrences
 
 # + {"colab_type": "text", "id": "sjDfotQiBq_0", "cell_type": "markdown"}
 # As illustrated above, the different variables have vastly different scales. This can make it hard to interpret the coefficients of our linear regression model, because they will depend on the original scales of each variable. For this reason, we would like to standardize the variables by calculating *z-scores*, where
@@ -135,8 +136,8 @@ fig.tight_layout()
 #
 
 # + {"colab": {}, "colab_type": "code", "id": "MhCqmBPjBq_1"}
-means = # your_code (one function call!)
-standard_deviations = # your_code (one function call!)
+means = np.mean(data)
+standard_deviations = np.std(data)
 
 
 # + {"colab_type": "text", "id": "ikz-7g1zBq_6", "cell_type": "markdown"}
@@ -148,7 +149,9 @@ standard_deviations = # your_code (one function call!)
 
 # + {"colab": {}, "colab_type": "code", "id": "C1WdttulBq_9"}
 def zscore(x):
-    return # your_code
+    x_mean = np.mean(x)
+    x_std = np.std(x)
+    return (x - x_mean) / x_std
 
 standardizeddata = data.apply(zscore)
 standardizeddata.head()
