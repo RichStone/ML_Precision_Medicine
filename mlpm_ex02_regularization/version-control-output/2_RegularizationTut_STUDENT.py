@@ -204,13 +204,13 @@ print('number of samples n =', n, 'and number of features d =', d)
 
 # + {"colab": {}, "colab_type": "code", "id": "h_TUDTFsBrAP"}
 def least_squares(x,y):
-    # your code (roughly 2-3 lines)
-    return theta
+    # take this Python! #KillerCleanCode
+    return np.linalg.inv(x.transpose().dot(x)).dot(x.transpose()).dot(y)
 
 
 # + {"colab": {}, "colab_type": "code", "id": "ffPlEnyBBrAT"}
 def predict(x, theta):
-    # your code
+    y_hat = x.dot(theta)
     return y_hat
 
 
@@ -237,16 +237,16 @@ X_valid, X_test, y_valid, y_test = train_test_split(X_test, y_test, test_size=0.
 # **Question 2**: After performing the operation above, How many % of the original data X are part of the train-, validation- and test-set, respectively? 
 
 # + {"colab_type": "raw", "id": "00nQsbZZBrAg", "cell_type": "markdown"}
-# train: ... %
-# validation: ... %
-# test: ... %
+# train: 70 %
+# validation: 15 %
+# test: 15 %
 
 # + {"colab_type": "text", "id": "KvzVH24UBrAg", "cell_type": "markdown"}
 # ## Task 4:  
 # Fit your model on `X_train` and `y_train` using your `least_squares`-function from above:
 
 # + {"colab": {}, "colab_type": "code", "id": "MlBC_rnPBrAh"}
-theta = # your_code
+theta = least_squares(X_train, y_train)
 
 # + {"colab": {}, "colab_type": "code", "id": "ItoRHSTCBrAn"}
 # we have a look at the resulting parameters
@@ -278,6 +278,7 @@ plt.scatter(y_valid, y_hat)
 plt.xlabel('Actual Values (y)')
 plt.ylabel('Predicted Values (y_hat)')
 plt.suptitle('Prediction vs Actual')
+plt.grid(color='g', linestyle='-', linewidth=0.5)
 plt.show()
 
 # + {"colab": {}, "colab_type": "code", "id": "hawzvvblBrA0"}
@@ -286,17 +287,22 @@ plt.scatter(y_valid, y_valid - y_hat)
 plt.xlabel('Actual Values (y)')
 plt.ylabel('Residual (y_hat - y)')
 plt.suptitle('Actual vs Residual')
+plt.grid(color='g', linestyle='-', linewidth=0.5)
 plt.show()
 
 
 # + {"colab_type": "text", "id": "MTxJm24YBrA3", "cell_type": "markdown"}
 # **Question 3**:  
-# What do you see in the 'Actual vs Residual' plot above? In which areas are you over-estimating y? In which areas are you under-estimating y? What could be the reason for this behavior?
+# What do you see in the 'Actual vs Residual' plot above? In which areas 
+# are you over-estimating y? In which areas are you under-estimating y? What could be the reason for this behavior?
 #
 # Write your answer in the cell below.
 
 # + {"colab_type": "raw", "id": "GuLLRFrXBrA5", "cell_type": "markdown"}
-#
+# - the residiual error seems to increase linearly
+# - y gets more and more overestimated as the actual y values get positive and especially increase around the 1 mark
+# - y get stronger underestimatedas the actual y values become negative
+# - reason ??? the model can be improved
 
 # + {"colab_type": "text", "id": "kafg6gLXBrA6", "cell_type": "markdown"}
 # ***
@@ -308,7 +314,7 @@ plt.show()
 # Why do we use regularization?
 
 # + {"colab_type": "raw", "id": "nqii2jG1BrA7", "cell_type": "markdown"}
-#
+# #### -> In order to avoid overfitting.
 
 # + {"colab_type": "text", "id": "KDuij6VlBrA-", "cell_type": "markdown"}
 # In the lecture we discussed the formula for regularized least squares using an L2-regularization term.
