@@ -390,7 +390,7 @@ plt.show()
 # Investigate the graph above. How would you visually identify the best value for lambda?
 
 # + {"colab_type": "raw", "id": "4FwDBKq-BrBT", "cell_type": "markdown"}
-# write your answer here
+# #### >> by locating the local minimum.
 
 # + {"colab_type": "text", "id": "fVYFgEVkBrBT", "cell_type": "markdown"}
 # ## Task 8:
@@ -405,9 +405,12 @@ plt.show()
 # find the best set of parameters theta:
 # this should not take more the 3 lines of code
 
-best_i = # your_code
-best_lambd = # your_code
-best_theta = # your_code
+best_i = mse.index(min(mse))
+best_lambd = L[best_i]
+best_theta = thetas[best_i]
+# -
+
+
 
 # + {"colab": {}, "colab_type": "code", "id": "kxZgp4ieBrBZ"}
 print('best lambda: {}'.format(best_lambd))
@@ -442,7 +445,7 @@ plt.show()
 
 # + {"colab": {}, "colab_type": "code", "id": "dwDSNi7aBrBq"}
 unregularized_yhat = predict(X_test, theta)
-regularized_yhat = predict(X_test, thetas[best, :, :])
+regularized_yhat = predict(X_test, thetas[best_i, :, :])
 
 mse_unregularized = np.mean(np.square(y_test - unregularized_yhat))
 mse_regularized = np.mean(np.square( y_test - regularized_yhat))
@@ -461,17 +464,24 @@ print('L2-regularized Least Squares MSE: {}'.format(mse_regularized))
 #
 # Look at the bar-plot of coefficients above. Discuss with your team-mates:
 #
-#  - What do you think are the most important variables to predict Insulin
-#  - Do these intuitively make sense?
-#  - What kind of analysis would further help you to understand the relationship between the different predictor variables?
-#  - Would you give this model to a clinic?
+#  - What do you think are the most important variables to predict Insulin  
+# -> The values with the highest weights
+#
+#  - Do these intuitively make sense?  
+# -> Glucose being the biggest factor totally makes sense as diabetes is always accompanied by high glucose level. Also it is widely known that pregnancies, genetic inheritance and age are factors that lead to a higher risk of diabetes. However, I would have thought that BMI would have greater impact on the diabetes risk.
+#
+#  - What kind of analysis would further help you to understand the relationship between the different predictor variables?  
+# -> 
+#
+#  - Would you give this model to a clinic?  
+# -> 
 
 # + {"colab_type": "text", "id": "mLegAb8gBrBv", "cell_type": "markdown"}
 # ## Note:
 #
 # Above we implemented L2-regularized linear regression using numpy. However, the [scikit learn](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html) package already includes Ridge regression and other types of regularized linear models. In practice it is strongly preferable to use those provided functions. However, you would not have learned any numpy-operations and the mathematical concepts ;)
 #
-#
+# 😱 tricksters! 😉
 
 # + {"colab_type": "text", "id": "C-VDLZWoBrBw", "cell_type": "markdown"}
 # Congratulations, you made it through the second tutorial of this course!  
