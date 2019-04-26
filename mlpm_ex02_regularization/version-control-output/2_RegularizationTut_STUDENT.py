@@ -332,8 +332,9 @@ def regularized_least_squares(x,y,lambd):
     n = x.shape[0]
     m = x.shape[1]
     
-    # your_code
-
+    inverse = np.linalg.inv(x.transpose().dot(x).dot(1/n) + np.identity(m).dot(lambd))
+    theta = np.dot(inverse, x.transpose().dot(y).dot(1/n))
+    
     return theta 
 
 
@@ -350,9 +351,9 @@ L = 10 ** np.linspace(start=1., stop=-4, num=41)
 
 thetas = []
 
-# note: we could also do this with a list comprehension
+# note: we could also do this with a list comprehension 👍🏾
 for lambd in L:
-    theta = # your code
+    theta = regularized_least_squares(X_train, y_train, lambd)
     thetas.append(theta)
     
 thetas = np.array(thetas)
@@ -365,7 +366,9 @@ thetas = np.array(thetas)
 mse = []
 
 for i in range(len(L)):
-    # your code
+    predicted_values = predict(X_valid, thetas[i])
+    current_mse = np.square(predicted_values - y_valid).mean()
+    mse.append(current_mse)
 
 print('mse: [{:.4f}, {:.4f} ... {:.4f}, {:.4f}]'.format(mse[0],mse[1],mse[-2],mse[-1]))
 
