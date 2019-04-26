@@ -474,7 +474,8 @@ print('L2-regularized Least Squares MSE: {}'.format(mse_regularized))
 # -> 
 #
 #  - Would you give this model to a clinic?  
-# -> 
+# -> further evaluation of model required  
+# -> further training data required
 
 # + {"colab_type": "text", "id": "mLegAb8gBrBv", "cell_type": "markdown"}
 # ## Note:
